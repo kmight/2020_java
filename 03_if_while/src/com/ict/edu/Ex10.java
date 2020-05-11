@@ -26,5 +26,20 @@ public class Ex10 {
 			System.out.print(i + " ");
 		}
 		System.out.println();
+		
+		// 0 ~ 10 짝수 출력
+		for (int i = 0; i < 11; i++) {
+			if(i % 2 == 0) {
+				System.out.print(i + " ");
+			}
+		}
+		System.out.println();
+		
+		// 짝수를 출력하자는 말은 홀수는 출력하지 말자
+		for (int i = 0; i < 11; i++) {
+			if(i % 2 == 1) continue;
+			System.out.print(i + " ");
+		}
+		System.out.println();
 	}
 }
