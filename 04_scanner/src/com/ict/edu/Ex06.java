@@ -16,8 +16,10 @@ public class Ex06 {
 			System.out.println("영어점수 : ");
 			int english = sc.nextInt();
 			
+			// 정보가공
 			int total = korean + math + english;
-			double avr = total/3;
+			//double avr = total/3;
+			double avr = (int)(total/3.0*10)/10.0; // 주의: 실수화
 			char score = 'F';
 			if(avr >= 90) {
 				score = 'A';
@@ -29,6 +31,7 @@ public class Ex06 {
 				score = 'F';
 			}
 			
+			// 정보출력
 			System.out.println("이름 : " + name);
 			System.out.println("총점 : " + total);
 			System.out.println("평균 : " + avr);
