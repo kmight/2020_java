@@ -2,7 +2,7 @@ package com.ict.edu;
 
 import java.util.Scanner;
 
-public class Ex09_main {
+public class Ex10_main {
 	public static void main(String[] args) {
 		// 5명의 이름, 국어, 영어, 수학을 입력받아서
 		// 이름, 총점, 평균, 학점, 순위를 구하고 정렬하자
@@ -12,11 +12,11 @@ public class Ex09_main {
 		
 		// 한 사람의 정보를 가지고 있는 클래스가 Ex09이다
 		// 5명의 정보를 가질 수 있는 배열을 만들자
-		Ex09[] arr = new Ex09[5];
+		Ex10[] arr = new Ex10[5];
 		
 		for (int i = 0; i < arr.length; i++) {
 			// ** 지역이므로 person은 for문이 돌때마다 생겼다가 사라진다
-			Ex09 person = new Ex09();
+			Ex10 person = new Ex10();
 			System.out.println("이름 : ");
 			// String name = sc.next();
 			// person.setName(name)
@@ -28,12 +28,20 @@ public class Ex09_main {
 			int eng = sc.nextInt();
 			System.out.println("수학점수 : ");
 			int math = sc.nextInt();
+			
 			// 합계
-			person.s_sum(kor, eng, math);
+			// 지금은 Ex10클래스가 처리와 저장을 같이하지만
+			// 처리와 저장을 별도로 할 때 많이 사용되는 기법
+			int sum = person.s_sum(kor, eng, math);
+			person.setSum(sum);
+			
 			// 평균
-			person.s_avg();
+			double avg = person.s_avg();
+			person.setAvg(avg);
+			
 			// 학점
-			person.s_hak();
+			String hak = person.s_hak();
+			person.setHak(hak);
 			
 			arr[i] = person;
 		} // for
@@ -50,13 +58,14 @@ public class Ex09_main {
 			}
 		}
 		// 정렬
-		int temp = 0;
-		for (int i = 0; i < arr.length -1; i++) {
-			for (int j = i+1; j < arr.length; j++) {
-				if(arr[i].getRank() > arr[j].getRank()) {
-					temp = arr[i].getRank();
-					arr[i].setRank(arr[j].getRank());
-					arr[j].setRank(temp);
+		// 임시 저장 클래스
+		Ex10 tmp = new Ex10();
+		for (int i = 0; i < arr.length - 1; i++) {
+			for (int j = i + 1; j < arr.length; j++) {
+				if (arr[i].getRank() > arr[j].getRank()) {
+					tmp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = tmp;
 				}
 			}
 		}
