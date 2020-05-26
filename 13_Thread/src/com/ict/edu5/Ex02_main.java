@@ -15,5 +15,9 @@ public class Ex02_main {
 /*
   숙제 : page 674
   
+  Car 13-9
+  Producer 13-10
+  Customer 13-11
+  Mn       13-12
   
 */
