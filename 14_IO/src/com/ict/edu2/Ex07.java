@@ -1,47 +1,51 @@
 package com.ict.edu2;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class Ex07 {
 	public static void main(String[] args) {
-		String pathname1 = "C:"+File.separator+"study"+File.separator+"util"+File.separator+"video.mp4";
-		File file1 = new File(pathname1);
+		String pathname 
+		= "C:"+File.separator+"study"+File.separator+"util"+File.separator+"io03.txt";
+		File file = new File(pathname);
 		
-		String pathname2 = "C:"+File.separator+"study"+File.separator+"util"+File.separator+"video_ex.mp4";
-		File file2 = new File(pathname2);
-		
-		FileInputStream fis = null;
 		FileOutputStream fos = null;
 		
+		// 속도향상을 위해 Buffer 사용, 혼자서는 사용 못함
+		BufferedOutputStream bos = null;
+				
 		try {
-			fis = new FileInputStream(file1);
-			fos = new FileOutputStream(file2);
+			// 스트림 체인 방식
+			fos = new FileOutputStream(file);
+			bos = new BufferedOutputStream(fos);
 			
-			int k = 0;
-			while ((k = fis.read()) != -1) {
-				fos.write(k);
-			}
+			// 하나 쓸 수 있다
+			bos.write(105); // i
+			bos.write('c');
+			bos.write('t');
 			
-			fos.flush();
+			// 배열을 이용
+			byte[] b = {'e','d','u'};
+			bos.write(b);
 			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// String 이용
+			String str = " Hello World";
+			byte[] b2 = str.getBytes();
+			bos.write(b2);
+			
+			bos.flush();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		} finally {
 			try {
-				if (fos != null) fos.close();
-				if (fis != null) fis.close();
+				if(bos != null) bos.close();
+				if(fos != null) fos.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}
-			
 		}
+		
 	}
 }
