@@ -5,75 +5,96 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-//Serializable 이 아닌 다른 방법
-//writeExternal() => 직렬화 , readExternal() => 역직렬
-//제외 시키는 방법 : transient 소용 없다., 
-//writeExternal()와 readExternal() 안에 있는 멤버를 동시에 제외시킨다. 
-
 public class VO implements Externalizable{
 	private String name;
-	private int age;
-	private double weight;
-	private boolean gender;
+	private int kor;
+	private int eng;
+	private int math;
+	private int sum;
+	private double avg;
+	private String hak;
 	
-	public VO() {
-		super();
-	}
-	
-	public VO(String name, int age, double weight, boolean gender) {
+	public VO() {}
+	public VO(String name, int kor, int eng, int math) {
 		super();
 		this.name = name;
-		this.age = age;
-		this.weight = weight;
-		this.gender = gender;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		sum = kor + eng + math;
+		avg = (int)(sum/3.0*10)/10.0;
+		if(avg>=90) {
+			hak = "A";
+		}else if(avg>=80) {
+			hak = "B";
+		}else if(avg>=70) {
+			hak = "C";
+		}else {
+			hak = "F";
+		}
 	}
-	
+	// 역직렬화
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		name = (String) in.readObject();
-		age = (int) in.readObject();
-		weight = (double) in.readObject();
-		gender = (boolean) in.readObject();
+		name = (String)in.readObject();
+		kor = (int)in.readObject();
+		eng = (int)in.readObject();
+		math = (int)in.readObject();
+		sum = (int)in.readObject();
+		avg = (double)in.readObject();
+		hak = (String)in.readObject();
 	}
-
+	// 직렬화
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(name);
-		out.writeObject(age);
-		out.writeObject(weight);
-		out.writeObject(gender);
+		out.writeObject(kor);
+		out.writeObject(eng);
+		out.writeObject(math);
+		out.writeObject(sum);
+		out.writeObject(avg);
+		out.writeObject(hak);
 	}
-	
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getAge() {
-		return age;
+	public int getKor() {
+		return kor;
 	}
-
-	public void setAge(int age) {
-		this.age = age;
+	public void setKor(int kor) {
+		this.kor = kor;
 	}
-
-	public double getWeight() {
-		return weight;
+	public int getEng() {
+		return eng;
 	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setEng(int eng) {
+		this.eng = eng;
 	}
-
-	public boolean isGender() {
-		return gender;
+	public int getMath() {
+		return math;
 	}
-
-	public void setGender(boolean gender) {
-		this.gender = gender;
+	public void setMath(int math) {
+		this.math = math;
 	}
-	
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+	public String getHak() {
+		return hak;
+	}
+	public void setHak(String hak) {
+		this.hak = hak;
+	}
 }
