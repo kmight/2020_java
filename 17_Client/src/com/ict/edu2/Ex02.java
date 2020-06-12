@@ -1,5 +1,7 @@
 package com.ict.edu2;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -28,9 +30,11 @@ public class Ex02 implements Runnable{
 		try {
 			while(true) {
 				System.out.print("입력 : ");
-				String msg = sc.next();
+				// String msg = sc.next(); // 띄어쓰기, Enter를 끝으로 본다.
 				
-				s = new Socket("203.236.220.79", 7777);
+				String msg = sc.nextLine();
+				
+				s = new Socket("203.236.220.79", 7788);
 				
 				// 보내기 
 				out = s.getOutputStream();
